@@ -17,7 +17,13 @@ def parse_data(uploaded_file):
         seqs.append(record.id)
     df = pd.DataFrame({"Seq ID": seqs, "GC Fraction": np.array(gc_fractions,dtype=np.float64)})
     return df
-
+    
+def view_gc_chart(df):
+    chart = alt.Chart(df).mark_bar().encode(
+        x='Seq ID',
+        y='GC Fraction',
+        tooltip=['Seq ID', 'GC Fraction']).properties()
+    st.altair_chart(chart, use_container_width=True)
 
 st.title("GC Viewer")
 st.markdown("GC Viewer is a simple application to explore GC fractions of all sequences in a FASTA file.")
@@ -29,8 +35,4 @@ if uploaded_file is not None:
     st.markdown("## GC Fraction as Table")
     st.write(df.set_index("Seq ID"))
     st.markdown("## GC Fraction as Chart")
-    chart = alt.Chart(df).mark_bar().encode(
-        x='Seq ID',
-        y='GC Fraction',
-        tooltip=['Seq ID', 'GC Fraction']).properties()
-    st.altair_chart(chart, use_container_width=True)
+    view_gc_chart(df)

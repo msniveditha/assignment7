@@ -7,10 +7,6 @@ import numpy as np
 import altair as alt
 import io
 
-"""
-This is a simple application to explore GC fractions of all sequences in a FASTA file.
-Author: Niveditha M.S.
-"""
 def parse_data(uploaded_file):
     fasta_sequences = SeqIO.parse(io.TextIOWrapper(uploaded_file), "fasta")
     seqs = []

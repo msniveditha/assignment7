@@ -1,1 +1,1 @@
-# This repo holds the code submissions for Assignment7
+# This repo holds the code for some streamlit projects
